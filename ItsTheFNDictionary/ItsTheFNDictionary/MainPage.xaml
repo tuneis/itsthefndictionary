@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ItsTheFNDictionary"
+             x:Class="ItsTheFNDictionary.MainPage">
+    <ScrollView>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="20">
+            <Label Text="It's The Fuckin' Dictionary" FontSize="40" FontAttributes="Bold" TextColor="Black" HorizontalOptions="CenterAndExpand" HorizontalTextAlignment="Center"/>
+            <Label Text="So you don't know what the fuck a word means eh?" HorizontalOptions="CenterAndExpand"/>
+            <Entry Placeholder="Look it up you cheeky cunt." x:Name="SearchEntry" HorizontalTextAlignment="Center"/>
+            <Button Clicked="Search_OnClicked" Text="SEARCH" x:Name="SearchButton" BackgroundColor="#48bc1e" TextColor="White"/>
+
+            <StackLayout x:Name="SearchResults" Margin="0,0,0,20">
+                <!--Results parsed from C#-->
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+
+</ContentPage>
