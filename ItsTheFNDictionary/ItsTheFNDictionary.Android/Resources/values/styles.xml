@@ -27,4 +27,11 @@
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#48bc1e</item>
   </style>
+ <!--// NoActionBar hides action bar, just remove to go back to default-->
+  <style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@drawable/splash</item>
+    <item name="android:windowNoTitle">true</item>
+  </style>
+
+  <color name="splash_background_color">#FFFFFF</color>
 </resources>

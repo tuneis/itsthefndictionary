@@ -66,6 +66,11 @@ namespace ItsTheFNDictionary
             }).ToList();
         }
 
+        /// <summary>
+        /// Search button event.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Search_OnClicked(object sender, EventArgs e)
         {
             // disable the button
@@ -89,8 +94,8 @@ namespace ItsTheFNDictionary
                     // add only verbs, nouns and adjectives to avoid having to ultra parse everything
                     for (var i = 0; i < definitions.Count; i++)
                     {
-                        // if not one of the 3 above skip this
-                        if (definitions[i].Category != "noun" && definitions[i].Category != "verb" && definitions[i].Category != "adjective")
+                        // if not in any of the word classes
+                        if (!StringExtensions.IsInWordClasses(definitions[i].Category))
                             continue;
 
                         // add first category to page
@@ -99,7 +104,11 @@ namespace ItsTheFNDictionary
 
                         // only add category as a label if it's not the same as the previous category that was added
                         else if (definitions[i - 1].Category != definitions[i].Category)
+                        {
+                            // reset word count when new category gets added
+                            wordCount = 1;
                             SearchResults.Children.Add(CreateCategoryLabel(definitions[i].Category));
+                        }
 
                         // add definition
                         SearchResults.Children.Add(new Label
@@ -107,6 +116,10 @@ namespace ItsTheFNDictionary
                             Text = $"{wordCount++}. {definitions[i].Value}"
                         });
                     }
+
+                    // if no children added after parsing, add the error label anyway because I consider it nothing found
+                    if(SearchResults.Children.Count == 0)
+                        AddRandomErrorLabel();
                 }
                 else
                 {
@@ -123,6 +136,9 @@ namespace ItsTheFNDictionary
             SearchButton.Text = "SEARCH";
         }
 
+        /// <summary>
+        /// Adds a label with a random message.
+        /// </summary>
         private void AddRandomErrorLabel()
         {
             SearchResults.Children.Add(new Label
@@ -134,7 +150,12 @@ namespace ItsTheFNDictionary
             });
         }
 
-        private Label CreateCategoryLabel(string category)
+        /// <summary>
+        /// Create category label with appropriate styling.
+        /// </summary>
+        /// <param name="category"></param>
+        /// <returns></returns>
+        private static Label CreateCategoryLabel(string category)
         {
             return new Label
             {

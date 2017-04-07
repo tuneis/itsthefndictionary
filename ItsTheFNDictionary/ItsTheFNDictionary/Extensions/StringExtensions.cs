@@ -12,8 +12,26 @@ namespace ItsTheFNDictionary.Extensions
         /// <summary>
         /// Words to add 'fuckin' after.
         /// </summary>
-        public static string[] Words => new[] { "a ", "any ", "he ", "she ", "it ", "the ", "its ", "that's ", "what's ", "it's ", "that is ", "what is ", "it is " };
+        public static string[] Words => new[]
+        {
+            "a ",
+            "any ",
+            "he ",
+            "she ",
+            "it ",
+            "the ",
+            "its ",
+            "that's ",
+            "what's ",
+            "it's ",
+            "that is ",
+            "what is ",
+            "it is "
+        };
 
+        /// <summary>
+        /// Random error messages for users.
+        /// </summary>
         public static string[] ErrorMessages => new[]
         {
             "This shit don't exist. Try again.",
@@ -25,7 +43,27 @@ namespace ItsTheFNDictionary.Extensions
             "No... just no...",
             "Just reading the error messages now?",
             "Hahaha, that's not a word...",
-            "Ok, fuck off, you know I can't look that up."
+            "Ok, fuck off, you know I can't look that up.",
+            "An error occurred while displaying the previous error."
+        };
+
+        /// <summary>
+        /// Classes of words to check against.
+        /// </summary>
+        public static string[] WordClasses => new[]
+        {
+            "noun",
+            "verb",
+            "adjective",
+            "adverb",
+            "pronoun",
+            "preposition",
+            "conjunction",
+            "determiner",
+            "exclamation",
+            "interjection",
+            "slang",
+            "article"
         };
 
         /// <summary>
@@ -69,6 +107,16 @@ namespace ItsTheFNDictionary.Extensions
         public static string RandomErrorMessage()
         {
             return ErrorMessages[Randomizer.Next(0, ErrorMessages.Length)];
+        }
+
+        /// <summary>
+        /// Check if the word class is contained in the the list of allowed word classes.
+        /// </summary>
+        /// <param name="wordClass"></param>
+        /// <returns></returns>
+        public static bool IsInWordClasses(string wordClass)
+        {
+            return WordClasses.Any(word => wordClass.ToLower().Contains(word) && !string.IsNullOrWhiteSpace(wordClass)); 
         }
     }
 }
